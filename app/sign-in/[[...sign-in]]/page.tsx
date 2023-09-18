@@ -1,7 +1,7 @@
 import { SignIn } from "@clerk/nextjs"
 
 const SignInPage = () => {
-  return <SignIn  redirectUrl={'/journal'}/>
+  return <SignIn  afterSignInUrl='/journal'/>
 }
 
 export default SignInPage
