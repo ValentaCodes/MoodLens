@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { auth } from '@clerk/nextjs'
 
 export default async function Home() {
-
   // make href dynamic based on user status
   const { userId } = await auth()
   let href = userId ? '/journal' : '/new-user'
