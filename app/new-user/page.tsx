@@ -4,16 +4,15 @@ import { redirect } from 'next/navigation'
 import type { User } from '@clerk/nextjs/api'
 
 const createNewUser = async () => {
-  try {
     const user: User | null = await currentUser()
 
-    const match = await prisma.user.findUnique({
+    const findUser = await prisma.user.findUnique({
       where: {
         clerkId: user?.id as string,
       },
     })
 
-    if (!match) {
+    if (!findUser) {
       await prisma.user.create({
         data: {
           clerkId: user?.id as string,
@@ -21,9 +20,6 @@ const createNewUser = async () => {
         },
       })
     }
-  } catch (error) {
-    console.error(error)
-  }
   redirect('/journal')
 }
 
