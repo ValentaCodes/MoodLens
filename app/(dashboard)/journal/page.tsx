@@ -8,7 +8,6 @@ import EntryCard from '@/components/EntryCard'
 const getEntries = async () => {
   try {
     const user = await getUserByClerkId()
-    console.log('user_data_from_function', user)
 
     // Find journal entries based on clerkId from OUR database
     const journal_entries = await prisma.journalEntry.findMany({
@@ -20,8 +19,7 @@ const getEntries = async () => {
       },
     })
 
-    // logging journal entries
-    console.log('journal_entries', journal_entries)
+    console.log('journal_entries - journal page', journal_entries)
     return journal_entries
   } catch (error) {
     console.log(
@@ -35,7 +33,7 @@ const JournalPage = async () => {
   const entries = await getEntries()
 
   return (
-    <div className="p-10">
+    <div className="p-10 bg-gray-200/30 h-full">
       <div className="text-2xl mb-8">Journal</div>
       <div className="grid grid-cols-3 gap-4">
         <NewEntryCard />
