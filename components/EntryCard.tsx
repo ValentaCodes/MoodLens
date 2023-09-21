@@ -1,8 +1,8 @@
 import React from 'react'
 
-const EntryCard = ({entry}) => {
+const EntryCard = (entry : any) => {
   return (
-    <div>{entry}</div>
+    <div>{}</div>
   )
 }
 
