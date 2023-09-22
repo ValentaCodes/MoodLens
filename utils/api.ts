@@ -1,8 +1,8 @@
 // Route handler function that will call our api's
 
 const createURL = (path: string) => {
-    // visiting github, the code below will return "https://github.com/"
-    // Allowing me to attach my api route path
+  // visiting github, the code below will return "https://github.com/"
+  // Allowing me to attach my api route path
   return window.location.origin + path
 }
 
@@ -13,7 +13,7 @@ export const createNewEntry = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
     })
   )
 
@@ -21,5 +21,18 @@ export const createNewEntry = async () => {
     const data = await res.json()
     return data.data
   }
+}
 
+export const updateEntry = async (id: string, content: string) => {
+  const res = await fetch(
+    new Request(createURL(`api/journal/${id}`), {
+      method: 'PATCH',
+      body: JSON.stringify({ content }),
+    })
+  )
+
+  if (res.ok) {
+    const data = await res.json()
+    return data.data
+  } 
 }
