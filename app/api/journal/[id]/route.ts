@@ -4,7 +4,7 @@ import { prisma } from '@/utils/db'
 import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 
-const PATCH = async (request: Request, { params }) => {
+export const PATCH = async (request: Request, { params }: any) => {
   // in next we grab the content from using the web standard "Request"
   const { content } = await request.json()
   const user = await getUserByClerkId()
@@ -19,7 +19,6 @@ const PATCH = async (request: Request, { params }) => {
       content,
     },
   })
-  return NextResponse.json({data: updatedEntry})
+  return NextResponse.json({ data: updatedEntry })
 }
 
-export default PATCH
