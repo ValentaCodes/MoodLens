@@ -39,8 +39,8 @@ model JournalEntry {
 
   // This will be a one-to-one relationship
   analysis Analysis?
-
-  @@index([userId])
+  // compound index
+  @@unique([userId, id])
 }
 
 model Analysis {
