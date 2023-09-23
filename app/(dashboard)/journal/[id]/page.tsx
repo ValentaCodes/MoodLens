@@ -2,6 +2,12 @@ import Editor from '@/components/Editor'
 import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 
+type Params = {
+  params: {
+    id: string
+  }
+}
+
 // function that will retrieve the entry to navigate/display
 const getEntry = async (id: string) => {
   const user = await getUserByClerkId()
@@ -15,11 +21,11 @@ const getEntry = async (id: string) => {
   })
 }
 
-// we pass params as props because it is a dynamic route
-const EntryPage = async ({ params }: any ) => {
-  const entry = await getEntry(params.id)
+// we pass params as props because this file is a dynamic route
+const EntryPage = async ({params}: Params ) => {
+  // it's "params.id" because that is the name of this parents folder
+  const entry = await getEntry(params?.id)
   return (
-    // it's "params.id" because that is the name of the folder
     <div className="h-full w-full">
       <Editor entry={entry} />
     </div>
