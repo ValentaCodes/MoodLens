@@ -5,6 +5,7 @@ import { getUserByClerkId } from '@/utils/auth'
 import NewEntryCard from '@/components/NewEntryCard'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
+import { analyze } from '@/utils/ai'
 
 const getEntries = async () => {
   try {
@@ -20,7 +21,8 @@ const getEntries = async () => {
       },
     })
 
-    console.log('journal_entries - journal page', journal_entries)
+    await analyze('create me a diet plan to gain weight')
+
     return journal_entries
   } catch (error) {
     console.log(
