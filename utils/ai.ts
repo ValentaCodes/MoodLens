@@ -1,8 +1,10 @@
 // We don't need langchain to use openAi but it will make some things easier
 import { OpenAI } from 'langchain/llms/openai'
-import {StructuredOutputParser} from 'langchain/output_parsers'
-import {z} from 'zod'
+import { StructuredOutputParser } from 'langchain/output_parsers'
+import { PromptTemplate } from 'langchain/prompts'
+import { z } from 'zod'
 
+// creates a zod schema that we will feed into langchain to coach the AI
 const instructions = StructuredOutputParser.fromZodSchema(
   z.object({
     mood: z
@@ -17,7 +19,7 @@ const instructions = StructuredOutputParser.fromZodSchema(
     negative: z
       .boolean()
       .describe(
-        'Is the journal entry negative? (i.e did it contain negative emotions?). '
+        'Is the journal entry negative? (i.e did it contain negative emotions or encounters?). '
       ),
     summary: z
       .string()
@@ -29,11 +31,33 @@ const instructions = StructuredOutputParser.fromZodSchema(
       ),
   })
 )
+// This function is creating a prompt by receiving content and then formatting instructions (our zod schema)
+const getPrompt = async (content: string) => {
+  const formattedInstructions = instructions.getFormatInstructions()
+    // creates a new prompt template that will receive input (entry's) and format to follow (formatted instructions)
+  const prompt = new PromptTemplate({
+    template: `Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n
+        {formattedInstructions}\n{entry}`,
+    inputVariables: [`entry`],
+    partialVariables: { formattedInstructions },
+  })
+//   this will format the prompt template
+  const input = await prompt.format({
+    entry: content,
+  })
+  return input
+}
 
-export const analyze = async (prompt: string) => {
-    const formatInstructions = instructions.getFormatInstructions()
+// The analysis function that we will use to get our final result 
+export const analyze = async (content: string) => {
+  const input = await getPrompt(content)
+  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
+  const result = await model.call(input)
 
-    const model = new OpenAI({temperature: 0, modelName: 'gpt-3.5-turbo'})
-    const result = await model.call(prompt)
-    console.log(result);
+  try {
+    // this will finally parse the result into javascript object. it was markdown prior
+    return instructions.parse(result)
+  } catch (e) {
+    console.log(e)
+  }
 }
