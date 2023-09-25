@@ -57,6 +57,7 @@ model Analysis {
   subject  String
   color    String
   negative Boolean
+  sentimentScore Int
 
   @@unique([entryId])
 }
