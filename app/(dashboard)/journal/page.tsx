@@ -21,8 +21,6 @@ const getEntries = async () => {
       },
     })
 
-    await analyze('create me a diet plan to gain weight')
-
     return journal_entries
   } catch (error) {
     console.log(
