@@ -39,6 +39,7 @@ model JournalEntry {
 
   // This will be a one-to-one relationship
   analysis Analysis?
+
   // compound index
   @@unique([userId, id])
 }
@@ -53,6 +54,7 @@ model Analysis {
 
   mood     String
   summary  String  @db.Text
+  subject  String
   color    String
   negative Boolean
 
