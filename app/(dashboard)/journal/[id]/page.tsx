@@ -7,7 +7,6 @@ type Params = {
     id: string
   }
 }
-
 // function that will retrieve the entry to navigate/display
 const getEntry = async (id: string) => {
   const user = await getUserByClerkId()
@@ -18,9 +17,11 @@ const getEntry = async (id: string) => {
         id,
       },
     },
+    include: {
+      analysis: true
+    }
   })
 }
-
 // we pass params as props because this file is a dynamic route
 const EntryPage = async ({ params }: Params) => {
   // it's "params.id" because that is the name of this parents folder
@@ -28,20 +29,20 @@ const EntryPage = async ({ params }: Params) => {
   const analysisData = [
     {
       name: 'Summary',
-      value: '',
+      value: entry?.analysis?.summary,
     },
     {
       name: 'Subject',
-      value: '',
+      value: entry?.analysis?.subject,
     },
     {
       name: 'Mood',
-      value: '',
+      value: entry?.analysis?.mood,
     },
     {
       name: 'Negative',
-      value: false,
-    },
+      value: entry?.analysis?.negative ? "True" : "False",
+    }
   ]
   return (
     <div className="h-full w-full grid grid-cols-3">
@@ -49,7 +50,7 @@ const EntryPage = async ({ params }: Params) => {
         <Editor entry={entry} />
       </div>
       <div className="border-l border-black/10">
-        <div className="bg-blue-300 px-6 py-10 ">
+        <div className=" px-6 py-10" style={{backgroundColor: entry?.analysis?.color}}>
           <h2 className="text-2xl">Analysis</h2>
         </div>
         <ul>

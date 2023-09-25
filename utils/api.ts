@@ -1,5 +1,4 @@
-// Route handler function that will call our api's
-
+// API util functions that will hit our Route handlers
 const createURL = (path: string) => {
   // visiting github, the code below will return "https://github.com/"
   // Allowing me to attach my api route path
@@ -34,5 +33,5 @@ export const updateEntry = async (id: string, content: string) => {
   if (res.ok) {
     const data = await res.json()
     return data.data
-  } 
+  }
 }
