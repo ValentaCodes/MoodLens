@@ -1,4 +1,4 @@
-// We dont need langchain to muse openAi but it will make some things easier
+// We don't need langchain to use openAi but it will make some things easier
 import { OpenAI } from 'langchain/llms/openai'
 
 
