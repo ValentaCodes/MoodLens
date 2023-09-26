@@ -3,6 +3,7 @@ import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextRequest, NextResponse } from 'next/server'
 import { analyze } from '@/utils/ai'
+import { revalidatePath } from 'next/cache'
 type Params = {
   params: {
     id: string
@@ -28,26 +29,17 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
     },
   })
 
-  if (!updatedEntry.analysis) {
-      const analysis = await analyze(updatedEntry.content)
-      await prisma.analysis.create({
-        data: {
-          entryId: updatedEntry?.id,
-          // we can use a spread because all property names in schema are the same names and types as they are in our zod schema
-          ...analysis,
-        },
-      })
-  } else { 
-    const updatedAnalysis = await analyze(updatedEntry.content)
-    await prisma.analysis.update({
-      where: {
-        id: updatedEntry?.analysis?.id
-      },
-      data: {
-        ...updatedAnalysis
-      }
-    })
-  }
+  const analysis = await analyze(updatedEntry.content)
+
+  await prisma.analysis.upsert({
+    where: {
+      entryId: updatedEntry?.id,
+    },
+    create: {
+      entryId: updatedEntry?.id,
+      ...analysis,
+    },
+    update: analysis,
+  })
   return NextResponse.json({ data: updatedEntry })
 }
-
