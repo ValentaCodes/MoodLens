@@ -13,7 +13,7 @@ const instructions = StructuredOutputParser.fromZodSchema(
     color: z
       .string()
       .describe(
-        'A hexadecimal color code that represents the mood of the journal entry. You should use color psychology to determine the color and return it in hexadecimal format. Example #0101fe for blue, it represents calm, tranquility, stability, wisdom.'
+        'A hexadecimal color code that represents the mood of the journal entry. You should use color psychology to determine the color and return it in hexadecimal format. Example #000000 for black, it represents sadness.'
       ),
     negative: z
       .boolean()
