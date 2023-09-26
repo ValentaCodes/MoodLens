@@ -18,13 +18,14 @@ const getEntry = async (id: string) => {
       },
     },
     include: {
-      analysis: true
-    }
+      analysis: true,
+    },
   })
 }
+
 // we pass params as props because this file is a dynamic route
 const EntryPage = async ({ params }: Params) => {
-  // it's "params.id" because that is the name of this parents folder
+// it's "params.id" because that is the name of this parents folder
   const entry = await getEntry(params?.id)
   const analysisData = [
     {
@@ -41,16 +42,19 @@ const EntryPage = async ({ params }: Params) => {
     },
     {
       name: 'Negative',
-      value: entry?.analysis?.negative ? "True" : "False",
-    }
+      value: entry?.analysis?.negative ? 'True' : 'False',
+    },
   ]
   return (
     <div className="h-full w-full grid grid-cols-3">
       <div className="col-span-2">
-        <Editor entry={entry} />
+        <Editor entry={entry}/>
       </div>
       <div className="border-l border-black/10">
-        <div className=" px-6 py-10" style={{backgroundColor: entry?.analysis?.color}}>
+        <div
+          className=" px-6 py-10"
+          style={{ backgroundColor: entry?.analysis?.color }}
+        >
           <h2 className="text-2xl">Analysis</h2>
         </div>
         <ul>
