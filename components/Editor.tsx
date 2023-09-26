@@ -2,8 +2,9 @@
 import { updateEntry } from '@/utils/api'
 import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
+import  {getAnalysisData}  from '@/utils/actions'
 
-const Editor = ({ entry, getAnalysisData }) => {
+const Editor = ({ entry }: any) => {
   const [value, setValue] = useState(entry?.content)
   const [isLoading, setIsLoading] = useState(false)
   useAutosave({
