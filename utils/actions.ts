@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-export default async function refreshAnalysis(id) {
-  revalidatePath(`/journal/${id}`)
+export const getAnalysisData = async (params) => {
+  'use server'
+  revalidatePath(`/journal/${params.id}`)
 }
