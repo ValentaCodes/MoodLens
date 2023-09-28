@@ -13,21 +13,21 @@ const instructions = StructuredOutputParser.fromZodSchema(
     color: z
       .string()
       .describe(
-        'A hexadecimal color code that represents the mood of the journal entry. You should use color psychology to determine the color and return it in hexadecimal format. Example #000000 for black, it represents sadness.'
+        'A hexadecimal color code that represents the mood of the journal entry. You should use color psychology to determine the color and return it in hexadecimal format. Example #000000 for black, represents sadness.'
       ),
     negative: z
       .boolean()
       .describe(
-        'Is the journal entry negative? (i.e did it contain negative emotions or encounters?). '
+        'Is the journal entry negative? (i.e did it contain negative emotions or encounters?). Curse words don\'nt ne '
       ),
-    subject: z.string().describe('The subject of the journal entry.'),
+    subject: z.string().describe('The underlying subject of the journal entry.'),
     summary: z
       .string()
       .describe('A quick summary of the entire journal entry.'),
     sentimentScore: z
       .number()
       .describe(
-        'sentiment of the text and rated on a scale from -10 to 10, where -10 is extremely negative.'
+        'sentiment of the text rated on a scale from -10 to 10, where -10 is extremely negative.'
       ),
   })
 )
@@ -36,7 +36,7 @@ const getPrompt = async (content) => {
   const formattedInstructions = instructions.getFormatInstructions()
   // creates a new prompt template that will receive input (entry's) and format to follow (formatted instructions)
   const prompt = new PromptTemplate({
-    template: `Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n
+    template: `You are Doctor of Psychology, analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n
         {formattedInstructions}\n{entry}`,
     inputVariables: [`entry`],
     partialVariables: { formattedInstructions },
