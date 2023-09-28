@@ -3,7 +3,6 @@ import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextRequest, NextResponse } from 'next/server'
 import { analyze } from '@/utils/ai'
-import { revalidatePath } from 'next/cache'
 type Params = {
   params: {
     id: string
@@ -14,6 +13,8 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
   // In Next we grab the the req.body by using the web standard "Request"
   const { content } = await request.json()
   const user = await getUserByClerkId()
+  
+  // Update a user's journal entry
   const updatedEntry = await prisma.journalEntry.update({
     where: {
       userId_id: {
@@ -28,9 +29,10 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
       analysis: true,
     },
   })
-
+  
   const analysis = await analyze(updatedEntry.content)
 
+  // update or create an analysis for a journal entry
   await prisma.analysis.upsert({
     where: {
       entryId: updatedEntry?.id,

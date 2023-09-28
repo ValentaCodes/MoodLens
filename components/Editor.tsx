@@ -2,7 +2,8 @@
 import { updateEntry } from '@/utils/api'
 import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
-import  {getAnalysisData}  from '@/utils/actions'
+import { getAnalysisData } from '@/utils/actions'
+import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
 
 const Editor = ({ entry }: any) => {
   const [value, setValue] = useState(entry?.content)
@@ -19,7 +20,7 @@ const Editor = ({ entry }: any) => {
   })
   return (
     <div className="w-full h-full">
-      {isLoading && <div>...saving</div>}
+      {isLoading && <LoadingAnalysis />}
       <textarea
         className="w-full h-full p-8 text-xl"
         value={value}

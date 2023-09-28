@@ -17,6 +17,7 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "framer-motion": "^10.16.4",
     "langchain": "^0.0.153",
     "next": "13.4.19",
     "openai": "^4.10.0",
