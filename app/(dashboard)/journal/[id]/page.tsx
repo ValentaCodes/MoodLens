@@ -1,6 +1,9 @@
 import Editor from '@/components/Editor'
 import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
+import { Suspense } from 'react'
+import LoadingAnalysis from './loading'
+import Analysis from '@/components/Analysis'
 
 type Params = {
   params: {
@@ -25,50 +28,17 @@ const getEntry = async (id: string) => {
 
 // we pass params as props because this file is a dynamic route
 const EntryPage = async ({ params }: Params) => {
-// it's "params.id" because that is the name of this parents folder
+  // it's "params.id" because that is the name of this parents folder
   const entry = await getEntry(params?.id)
-  const analysisData = [
-    {
-      name: 'Summary',
-      value: entry?.analysis?.summary,
-    },
-    {
-      name: 'Subject',
-      value: entry?.analysis?.subject,
-    },
-    {
-      name: 'Mood',
-      value: entry?.analysis?.mood,
-    },
-    {
-      name: 'Negative',
-      value: entry?.analysis?.negative ? 'True' : 'False',
-    },
-  ]
+
   return (
     <div className="h-full w-full grid grid-cols-3">
       <div className="col-span-2">
-        <Editor entry={entry}/>
+        <Editor entry={entry} />
       </div>
-      <div className="border-l border-black/10">
-        <div
-          className=" px-6 py-10"
-          style={{ backgroundColor: entry?.analysis?.color }}
-        >
-          <h2 className="text-2xl">Analysis</h2>
-        </div>
-        <ul>
-          {analysisData.map((data) => (
-            <li
-              key={data.name}
-              className=" px-2 py-4 flex items-center justify-between border-b border-t border-black/10"
-            >
-              <span className="text-lg font-semibold">{data.name}</span>
-              <span>{data.value}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Suspense fallback={<LoadingAnalysis />}>
+        <Analysis entry={entry} />
+      </Suspense>
     </div>
   )
 }
