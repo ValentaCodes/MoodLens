@@ -5,7 +5,7 @@ import { UserButton } from '@clerk/nextjs'
 const DashboardLayout = ({ children }: any) => {
   return (
     <div className="h-screen w-screen relative">
-      <aside className="absolute top-0 w-[200px] left-0 border-r">
+      <aside className="absolute top-0 w-[200px] left-0">
         MoodLens
       </aside>
       <div className="ml-[200px] h-full">

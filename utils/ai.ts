@@ -18,7 +18,7 @@ const instructions = StructuredOutputParser.fromZodSchema(
     negative: z
       .boolean()
       .describe(
-        'Is the journal entry negative? (i.e did it contain negative emotions or encounters?). Curse words don\'nt ne '
+        'Is the journal entry negative? (i.e did it contain sad emotions or negative encounters?). Curse words don\'t necessarily mean that it\'s negative. '
       ),
     subject: z.string().describe('The underlying subject of the journal entry.'),
     summary: z
