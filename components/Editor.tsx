@@ -2,7 +2,7 @@
 import { updateEntry } from '@/utils/api'
 import { useState } from 'react'
 import { useAutosave } from 'react-autosave'
-import { getAnalysisData } from '@/utils/actions'
+import { revalidateAnalysisData } from '@/utils/actions'
 import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
 
 const Editor = ({ entry }: any) => {
@@ -15,7 +15,7 @@ const Editor = ({ entry }: any) => {
       await updateEntry(entry?.id, _value)
       setIsLoading(false)
       // server action that invalidates cached data
-      getAnalysisData(entry.id)
+      revalidateAnalysisData(entry.id)
     },
   })
   return (

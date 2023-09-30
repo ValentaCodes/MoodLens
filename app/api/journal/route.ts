@@ -1,6 +1,5 @@
 import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
-import { revalidatePath } from 'next/cache'
 import { NextResponse } from 'next/server'
 
 //This call will allow me to post journal entires to the database
@@ -13,7 +12,7 @@ export const POST = async () => {
       content: 'Write about your day!',
     },
   })
-  revalidatePath('/journal')
+
   return NextResponse.json({ data: entry })
 }
 // NOTE: Next.js and caching

@@ -25,7 +25,7 @@ const Analysis = ({ entry }) => {
         className=" px-6 py-10"
         style={{ backgroundColor: entry?.analysis?.color }}
       >
-        <h2 className="text-2xl">Analysis</h2>
+        <h2 className="text-2xl text-white">Analysis</h2>
       </div>
       <ul>
         {analysisData.map((data) => (
@@ -34,7 +34,7 @@ const Analysis = ({ entry }) => {
             className=" px-2 py-4 flex items-center justify-between border-b border-t border-black/10"
           >
             <span className="text-lg font-semibold">{data.name}</span>
-            <span>{data.value}</span>
+            <span className='capitalize'>{data.value}</span>
           </li>
         ))}
       </ul>

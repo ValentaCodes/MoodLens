@@ -2,6 +2,7 @@
 // Which means we can fetch all the journal entries right here. no code will make it to the browser.
 import { prisma } from '@/utils/db'
 import { getUserByClerkId } from '@/utils/auth'
+import { revalidateJournalPage } from '@/utils/actions'
 import NewEntryCard from '@/components/NewEntryCard'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
@@ -10,7 +11,7 @@ const getEntries = async () => {
   try {
     const user = await getUserByClerkId()
 
-    // Find journal entries based on clerkId from OUR database
+    // Find journal entries based on user's ID from OUR database
     const journal_entries = await prisma.journalEntry.findMany({
       where: {
         userId: user?.id as string | undefined,
@@ -30,6 +31,7 @@ const getEntries = async () => {
       error
     )
   }
+  revalidateJournalPage()
 }
 
 const JournalPage = async () => {
