@@ -6,6 +6,7 @@ import { revalidateJournalPage } from '@/utils/actions'
 import NewEntryCard from '@/components/NewEntryCard'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
+import React from 'react'
 
 const getEntries = async () => {
   try {
@@ -34,6 +35,7 @@ const getEntries = async () => {
   revalidateJournalPage()
 }
 
+
 const JournalPage = async () => {
   const entries = await getEntries()
 
@@ -44,7 +46,7 @@ const JournalPage = async () => {
         <NewEntryCard />
         {entries?.map((entry) => (
           <Link href={`/journal/${entry.id}`} key={entry.id}>
-            <EntryCard entry={entry} />
+            <EntryCard entry={entry}/>
           </Link>
         ))}
       </div>
