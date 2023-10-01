@@ -1,6 +1,7 @@
+import Entry from '@/utils/interfaces'
 import React from 'react'
 
-const Analysis = ({ entry }) => {
+const Analysis = (entry: Entry) => {
   const analysisData = [
     {
       name: 'Summary',
@@ -34,7 +35,7 @@ const Analysis = ({ entry }) => {
             className=" px-2 py-4 flex items-center justify-between border-b border-t border-black/10"
           >
             <span className="text-lg font-semibold">{data.name}</span>
-            <span className='capitalize'>{data.value}</span>
+            <span className="capitalize">{data.value}</span>
           </li>
         ))}
       </ul>
