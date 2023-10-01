@@ -1,11 +1,16 @@
 'use client'
 import { updateEntry } from '@/utils/api'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import { revalidateAnalysisData } from '@/utils/actions'
 import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
+import Entry from '@/utils/interfaces'
 
-const Editor = ({ entry }: any) => {
+interface EntryProps {
+  entry: Entry
+}
+
+const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
   const [value, setValue] = useState(entry?.content)
   const [isLoading, setIsLoading] = useState(false)
   useAutosave({
