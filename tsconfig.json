@@ -14,6 +14,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "typeRoots": [
+      "utils/interfaces.ts"
+    ],
     "plugins": [
       {
         "name": "next"
