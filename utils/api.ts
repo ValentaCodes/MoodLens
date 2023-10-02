@@ -35,3 +35,18 @@ export const updateEntry = async (id: string, content: string) => {
     return data.data
   }
 }
+
+export const deleteEntry = async (id: string) => {
+  const res = await fetch(
+    new Request(createURL(`/api/journal/${id}`), {
+      method: 'DELETE',
+    })
+  )
+
+  if (res.ok) {
+    const data = await res.json()
+    console.log('deleted entry');
+    
+    return data.data
+  }
+}
