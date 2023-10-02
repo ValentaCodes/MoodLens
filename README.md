@@ -1,34 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MoodLens
 
-## Getting Started
+<a href="https://choosealicense.com/licenses/mit">
+<img src="https://img.shields.io/badge/License-MIT-blue" />
+</a>
 
-First, run the development server:
+## *Table of Contents*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [Description](#description)
+- [Tools](#tools)
+- [Motivation](#motivation)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Testing](#testing)
+- [License](#license)
+- [Screenshots](#screenshots)
+- [Questions](#questions)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## **Description**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  A journaling website that utilizes Artificial Intelligence to analyze your entries. Moodlens will assign the entry with a color, mood, summary, ans a subject. Moodlens will also assign each entry with a sentiment score and create a graph for you to see an overview of you mood. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## **Tools**
 
-## Learn More
+  ChatGPT, LangChain, Zod, Typescript + React, Prisma, PlanetScale, Next.js, Tailwind
 
-To learn more about Next.js, take a look at the following resources:
+## **Motivation**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  I needed to use AI. With the recent advancements in AI I wanted to get ahead of the curve as a junior dev and start learning how to incorporate AI into websites.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## **Installation**
+  
+  N/A
 
-## Deploy on Vercel
+## **Usage**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  - Signup - Journal - Ask Questions about your entries - have fun!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## **Contribution**
+
+  See Below
+  
+## **Testing**
+
+  N/A
+
+## **Screenshots**
+
+  Add your screenshots here:
+
+  ![ALT TEXT](URL)
+
+## **Links**
+  
+  Add any relevant links for this project below:
+
+  [Your Website](URL)
+
+## License
+
+  This project is licensed under the terms of the MIT license.
+
+  Detailed information about this license can be found here: [License Info](https://choosealicense.com/licenses/mit)
+
+## Questions
+
+  Any question about this project contact me here:
+
+- [Github](https://github.com/valentacodes)
+- <valentacodes@gmail.com>
+  
