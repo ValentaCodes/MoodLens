@@ -23,7 +23,14 @@
 
 ## **Tools**
 
-  ChatGPT, LangChain, Zod, Typescript + React, Prisma, PlanetScale, Next.js, Tailwind
+  - ChatGPT
+  - LangChain
+  - Zod
+  - Typescript + React
+  - Prisma
+  - PlanetScale
+  - Next.js
+  - Tailwind
 
 ## **Motivation**
 
@@ -35,7 +42,10 @@
 
 ## **Usage**
 
-  - Signup - Journal - Ask Questions about your entries - have fun!
+  - Signup
+  - Journal
+  - Ask questions about your entries
+  - Have fun!
 
 ## **Contribution**
 
