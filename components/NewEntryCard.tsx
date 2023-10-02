@@ -9,6 +9,7 @@ const NewEntryCard = () => {
   const handleNewEntry = async () => {
     const data = await createNewEntry()
     //  redirects to new a route using the id of the journal entry
+    // './app/(dashboard)/journal/[id]/page'
     router.push(`/journal/${data?.id}`)
   }
 
