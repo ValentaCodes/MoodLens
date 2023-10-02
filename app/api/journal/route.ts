@@ -2,7 +2,8 @@ import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextResponse } from 'next/server'
 
-//This call will allow me to post journal entires to the database
+// This call will create a new journal entry to the database
+// Initiated in NewEntryCard
 export const POST = async () => {
   const user = await getUserByClerkId()
 

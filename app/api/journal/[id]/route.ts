@@ -3,6 +3,7 @@ import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import { NextRequest, NextResponse } from 'next/server'
 import { analyze } from '@/utils/ai'
+
 type Params = {
   params: {
     id: string
@@ -13,7 +14,7 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
   // In Next we grab the the req.body by using the web standard "Request"
   const { content } = await request.json()
   const user = await getUserByClerkId()
-  
+
   // Update a user's journal entry
   const updatedEntry = await prisma.journalEntry.update({
     where: {
@@ -29,7 +30,7 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
       analysis: true,
     },
   })
-  
+
   const analysis = await analyze(updatedEntry.content)
 
   // update or create an analysis for a journal entry
@@ -44,4 +45,19 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
     update: analysis,
   })
   return NextResponse.json({ data: updatedEntry })
+}
+
+export const DELETE = async ({ params }: Params) => {
+  const user = await getUserByClerkId()
+
+  const deletedEntry = await prisma.journalEntry.delete({
+    where: {
+      userId_id: {
+        userId: user?.id as string,
+        id: params?.id,
+      },
+    },
+  })
+
+  return NextResponse.json({data: deletedEntry, message: `Deleted Entry ${params.id}`})
 }

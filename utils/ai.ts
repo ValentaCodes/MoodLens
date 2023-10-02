@@ -9,18 +9,20 @@ const instructions = StructuredOutputParser.fromZodSchema(
   z.object({
     mood: z
       .string()
-      .describe('The mood of the person who wrote the journal entry.'),
+      .describe('The overall mood of the person who wrote the journal entry.'),
     color: z
       .string()
       .describe(
-        'A hexadecimal color code that represents the mood of the journal entry. You should use color psychology to determine the color and return it in hexadecimal format. Example #000000 for black, represents sadness.'
+        'A hexadecimal color code that represents the mood of the journal entry. Example #000000 for black, it represents sadness.'
       ),
     negative: z
       .boolean()
       .describe(
-        'Is the journal entry negative? (i.e did it contain sad emotions or negative encounters?). Curse words don\'t necessarily mean that it\'s negative. '
+        "Is the journal entry negative? (i.e did it contain sad emotions or negative encounters?). Curse words don't necessarily mean that it's negative. "
       ),
-    subject: z.string().describe('The underlying subject of the journal entry.'),
+    subject: z
+      .string()
+      .describe('The underlying subject of the journal entry.'),
     summary: z
       .string()
       .describe('A quick summary of the entire journal entry.'),
@@ -36,7 +38,7 @@ const getPrompt = async (content) => {
   const formattedInstructions = instructions.getFormatInstructions()
   // creates a new prompt template that will receive input (entry's) and format to follow (formatted instructions)
   const prompt = new PromptTemplate({
-    template: `You are Doctor of Psychology, analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n
+    template: `You are Doctor of Psychology, analyze the following journal entry as if it were a patient. Follow the instructions and format your response to match the format instructions, no matter what! \n
         {formattedInstructions}\n{entry}`,
     inputVariables: [`entry`],
     partialVariables: { formattedInstructions },
@@ -50,8 +52,11 @@ const getPrompt = async (content) => {
 
 // The analysis function that we will use to get our final result
 export const analyze = async (content) => {
+  // Get input that has been formatted
   const input = await getPrompt(content)
+  // create the model
   const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
+  // call the model and initiate result
   const result = await model.call(input)
 
   try {
@@ -62,8 +67,4 @@ export const analyze = async (content) => {
   }
 }
 
-
-
-const aiQuestion = async () => {
-
-}
+const aiQuestion = async () => {}
