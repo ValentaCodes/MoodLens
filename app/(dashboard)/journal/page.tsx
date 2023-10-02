@@ -7,6 +7,7 @@ import NewEntryCard from '@/components/NewEntryCard'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
 import React from 'react'
+import QuestionForm from '@/components/Questions'
 
 const getEntries = async () => {
   try {
@@ -42,6 +43,9 @@ const JournalPage = async () => {
   return (
     <div className="p-10 bg-gray-200/30 h-full">
       <div className="text-2xl mb-8">Journal</div>
+      <div className='my-8'>
+        <QuestionForm/>
+      </div>
       <div className="grid grid-cols-3 gap-4">
         <NewEntryCard />
         {entries?.map((entry) => (
