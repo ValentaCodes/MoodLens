@@ -1,7 +1,7 @@
 import Editor from '@/components/Editor'
 import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
-import { ReactPropTypes, Suspense } from 'react'
+import { Suspense } from 'react'
 import LoadingAnalysis from './loading'
 import Analysis from '@/components/Analysis'
 
