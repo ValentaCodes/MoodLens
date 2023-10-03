@@ -1,4 +1,4 @@
-# MoodLens
+# MoodLens - Work In Progress
 
 <a href="https://choosealicense.com/licenses/mit">
 <img src="https://img.shields.io/badge/License-MIT-blue" />
@@ -57,9 +57,7 @@
 
 ## **Screenshots**
 
-  Add your screenshots here:
-
-  ![ALT TEXT](URL)
+  ![Homepage](https://github.com/ValentaCodes/MoodLens/assets/92850947/5c5c20c2-24dd-4757-ab60-7d45ab78ae14)
 
 ## **Links**
   
