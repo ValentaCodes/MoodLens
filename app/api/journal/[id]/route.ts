@@ -40,9 +40,9 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
     },
     create: {
       entryId: updatedEntry?.id,
-      ...analysis,
+      ...analysis!,
     },
-    update: analysis,
+    update: analysis!,
   })
   return NextResponse.json({ data: updatedEntry })
 }
