@@ -34,7 +34,7 @@ const instructions = StructuredOutputParser.fromZodSchema(
   })
 )
 // This function is creating a prompt by receiving content and then formatting instructions (our zod schema)
-const getPrompt = async (content) => {
+const getPrompt = async (content: string) => {
   const formattedInstructions = instructions.getFormatInstructions()
   // creates a new prompt template that will receive input (entry's) and format to follow (formatted instructions)
   const prompt = new PromptTemplate({
@@ -51,7 +51,7 @@ const getPrompt = async (content) => {
 }
 
 // The analysis function that we will use to get our final result
-export const analyze = async (content) => {
+export const analyze = async (content: string) => {
   // Get input that has been formatted
   const input = await getPrompt(content)
   // create the model
@@ -67,4 +67,4 @@ export const analyze = async (content) => {
   }
 }
 
-const aiQuestion = async () => {}
+// const aiQuestion = async () => {}

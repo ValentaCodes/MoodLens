@@ -40,24 +40,27 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
     },
     create: {
       entryId: updatedEntry?.id,
-      ...analysis,
+      ...analysis!,
     },
-    update: analysis,
+    update: analysis!,
   })
   return NextResponse.json({ data: updatedEntry })
 }
 
-export const DELETE = async ({ params }: Params) => {
-  const user = await getUserByClerkId()
+// export const DELETE = async ({ params }: Params) => {
+//   const user = await getUserByClerkId()
 
-  const deletedEntry = await prisma.journalEntry.delete({
-    where: {
-      userId_id: {
-        userId: user?.id as string,
-        id: params?.id,
-      },
-    },
-  })
+//   const deletedEntry = await prisma.journalEntry.delete({
+//     where: {
+//       userId_id: {
+//         userId: user?.id as string,
+//         id: params?.id,
+//       },
+//     },
+//   })
 
-  return NextResponse.json({data: deletedEntry, message: `Deleted Entry ${params.id}`})
-}
+//   return NextResponse.json({
+//     data: deletedEntry,
+//     message: `Deleted Entry ${params.id}`,
+//   })
+// }

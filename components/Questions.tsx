@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 const QuestionForm = () => {
   const [value, setValue] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
   }
   return (
