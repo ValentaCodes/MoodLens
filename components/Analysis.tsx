@@ -1,7 +1,11 @@
 import Entry from '@/utils/interfaces'
 import React from 'react'
 
-const Analysis = (entry: Entry) => {
+interface EntryProps {
+  entry: Entry | null
+}
+
+const Analysis: React.FC<EntryProps> = ({ entry }: EntryProps) => {
   const analysisData = [
     {
       name: 'Summary',
