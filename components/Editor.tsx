@@ -7,7 +7,7 @@ import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
 import Entry from '@/utils/interfaces'
 
 interface EntryProps {
-  entry: Entry | null
+  entry: Entry | null 
 }
 
 const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
