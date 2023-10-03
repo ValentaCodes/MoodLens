@@ -1,13 +1,13 @@
 'use client'
 import { updateEntry } from '@/utils/api'
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import { revalidateAnalysisData } from '@/utils/actions'
 import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
 import Entry from '@/utils/interfaces'
 
 interface EntryProps {
-  entry: Entry
+  entry: Entry | null
 }
 
 const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
@@ -17,10 +17,10 @@ const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
     data: value,
     onSave: async (_value) => {
       setIsLoading(true)
-      await updateEntry(entry?.id, _value)
+      await updateEntry(entry?.id as string, _value!)
       setIsLoading(false)
       // server action that invalidates cached data
-      revalidateAnalysisData(entry.id)
+      revalidateAnalysisData(entry?.id)
     },
   })
   return (
