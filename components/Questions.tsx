@@ -13,7 +13,7 @@ const QuestionForm = () => {
         <input
           onChange={(e) => setValue(e.target.value)}
           value={value}
-          className="w-[500px] px-6 border border-black/20 py-6 text-lg rounded-lg"
+          className="w-60 sm:max-2xl:w-3/5 px-6 border border-black/20 py-6 text-lg rounded-lg"
           aria-label="Question Input"
           placeholder="Ask me a question about your journal entries..."
         />
