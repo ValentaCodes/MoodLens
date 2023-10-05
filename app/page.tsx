@@ -8,7 +8,7 @@ export default async function Home() {
 
   // In tailwind w-screen&h-screen represent 100%vh/vw
   return (
-    <div className="w-screen h-screen bg-black flex justify-center items-center text-white">
+    <div className="w-screen h-screen bg-black flex justify-center items-center text-white px-4">
       <div className="w-full max-w-[800px] mx-auto">
         <h1 className="text-6xl">MoodLens, Your Ultimate Writing Companion</h1>
         <p className="text-2xl text-white/50 my-4">

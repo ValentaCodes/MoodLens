@@ -1,6 +1,6 @@
 'use client'
 import { updateEntry } from '@/utils/api'
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import { revalidateAnalysisData } from '@/utils/actions'
 import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
