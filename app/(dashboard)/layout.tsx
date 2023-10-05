@@ -24,11 +24,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="sm:max-2xl:ml-[200px] sm:max-2xl:h-full">
         <header className="border-y sm:max-2xl:h-[60px] sm:max-2xl:border-b sm:max-2xl:border-black/10">
           <div className="flex items-center justify-end px-4 py-4 sm:max-2xl:h-full sm:max-2xl:w-full sm:max-2xl:px-6">
-            <UserButton showName={true}/>
+            <UserButton showName={true} />
           </div>
         </header>
-        <div className="flex text-center justify-center items-center sm:max-2xl:absolute sm:max-2xl:top-0 sm:max-2xl:w-[200px] sm:max-2xl:left-0 sm:max-2xl:border-r sm:max-2xl:h-full">
-          <div className="sm:max-2xl:px-4 sm:max-2xl:py-4 ">
+        <div className="flex text-center justify-center items-center md:absolute sm:max-2xl:absolute sm:max-2xl:top-0 sm:max-2xl:w-[200px] sm:max-2xl:left-0 sm:max-2xl:border-r sm:max-2xl:h-full">
+          <div className="sm:max-2xl:px-4 sm:max-2xl:py-4 md:sticky">
             <ul className="flex flex-row text-center py-4 divide-x divide-gray-200 sm:max-2xl:divide-y sm:max-2xl:divide-gray-200 sm:max-2xl:flex-col">
               {links.map((link) => (
                 <li className="px-4 py-4" key={link.label}>
