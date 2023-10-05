@@ -22,16 +22,16 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col ">
       <div className="sm:max-2xl:ml-[200px] sm:max-2xl:h-full">
-        <header className="sm:max-2xl:h-[60px] border-b border-black/10">
-          <div className="sm:max-2xl:h-full sm:max-2xl:w-full sm:max-2xl:px-6 flex items-center justify-end">
-            <UserButton showName={true} />
+        <header className="border-y sm:max-2xl:h-[60px] sm:max-2xl:border-b sm:max-2xl:border-black/10">
+          <div className="flex items-center justify-end px-4 py-4 sm:max-2xl:h-full sm:max-2xl:w-full sm:max-2xl:px-6">
+            <UserButton showName={true}/>
           </div>
         </header>
-        <div className="sm:max-2xl:absolute sm:max-2xl:top-0 sm:max-2xl:w-[200px] sm:max-2xl:left-0 sm:max-2xl:border-r sm:max-2xl:h-full align-center">
-          <div className="sm:max-2xl:px-4 sm:max-2xl:py-4">
-            <ul className="sm:max-2xl:divide-y sm:max-2xl:divide-gray-200 flex flex-row sm:max-2xl:flex-col">
+        <div className="flex text-center justify-center items-center sm:max-2xl:absolute sm:max-2xl:top-0 sm:max-2xl:w-[200px] sm:max-2xl:left-0 sm:max-2xl:border-r sm:max-2xl:h-full">
+          <div className="sm:max-2xl:px-4 sm:max-2xl:py-4 ">
+            <ul className="flex flex-row text-center py-4 divide-x divide-gray-200 sm:max-2xl:divide-y sm:max-2xl:divide-gray-200 sm:max-2xl:flex-col">
               {links.map((link) => (
-                <li className=" py-5" key={link.label}>
+                <li className="px-4 py-4" key={link.label}>
                   <Link href={link.href}>
                     <p className="text-2xl">{link.label}</p>
                   </Link>
