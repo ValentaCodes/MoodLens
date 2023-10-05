@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className='min-h-screen min-w-screen'>
-        <body className="min-h-full">{children}</body>
+        <body className="h-full">{children}</body>
       </html>
     </ClerkProvider>
   )
