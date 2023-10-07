@@ -1,5 +1,5 @@
 import { prisma } from '@/utils/db'
-import { auth, currentUser } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 import type { User } from '@clerk/nextjs/api'
 
