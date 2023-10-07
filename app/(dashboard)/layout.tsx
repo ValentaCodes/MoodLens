@@ -21,19 +21,21 @@ const links = [
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex flex-col ">
-      <div className="sm:max-2xl:ml-[200px] sm:max-2xl:h-full">
-        <header className="border-y sm:max-2xl:h-[60px] sm:max-2xl:border-b sm:max-2xl:border-black/10">
-          <div className="flex items-center justify-end px-4 py-4 sm:max-2xl:h-full sm:max-2xl:w-full sm:max-2xl:px-6">
+      <div className="sm:ml-[200px] sm:h-full">
+        <header className="border-y sm:2xl:h-[60px] sm:border-b sm:border-black/10">
+          <div className="flex items-center justify-end px-4 py-4 sm:h-full sm:w-full sm:px-6">
             <UserButton showName={true} />
           </div>
         </header>
-        <div className="flex text-center justify-center items-center md:absolute sm:max-2xl:absolute sm:max-2xl:top-0 sm:max-2xl:w-[200px] sm:max-2xl:left-0 sm:max-2xl:border-r sm:max-2xl:h-full">
-          <div className="sm:max-2xl:px-4 sm:max-2xl:py-4 md:sticky">
-            <ul className="flex flex-row text-center py-4 divide-x divide-gray-200 sm:max-2xl:divide-y sm:max-2xl:divide-gray-200 sm:max-2xl:flex-col">
+        <div className="flex text-center justify-center items-center sm:absolute sm:top-0 sm:w-[200px] sm:left-0 sm:border-r sm:h-full">
+          <div className="sm:px-4 sm:py-4">
+            <ul className="flex flex-row text-center sm:py-4 divide-gray-200 sm:divide-y sm:divide-gray-200 sm:flex-col ">
               {links.map((link) => (
                 <li className="px-4 py-4" key={link.label}>
                   <Link href={link.href}>
-                    <p className="text-2xl">{link.label}</p>
+                    <p className="text-2xl ease-in-out duration-200 hover:rotate-6">
+                      {link.label}
+                    </p>
                   </Link>
                 </li>
               ))}
