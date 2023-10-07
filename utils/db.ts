@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 // With hot module reloading, multiple database connection objects can be created
 // Causing issues in the application. These utility methods check if the connection has already been established and reuse the existing connection.
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined
+  prisma: PrismaClient 
 }
 
 export const prisma =
