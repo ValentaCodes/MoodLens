@@ -1,9 +1,12 @@
 // We don't need langchain to use openAi but it will make some things easier
+import { Document } from 'langchain/document'
 import { OpenAI } from 'langchain/llms/openai'
 import { StructuredOutputParser } from 'langchain/output_parsers'
 import { PromptTemplate } from 'langchain/prompts'
 import { z } from 'zod'
-
+import { loadQARefineChain } from 'langchain/chains'
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
+import { MemoryVectorStore } from 'langchain/vectorstores/memory'
 // creates a zod schema that we will feed into langchain to coach the AI
 const instructions = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -67,4 +70,32 @@ export const analyze = async (content: string) => {
   }
 }
 
-// const aiQuestion = async () => {}
+// this function will turn our entries into documents to feed into our model and retrieve.
+// Will use memory vector db 
+const askMeAnything = async (question: string, entries: any) => {
+  // convert entires into documents
+  const docs = entries.map((entry: any) => {
+    return new Document({
+      pageContent: entry.content,
+      metadata: {
+        id: entry.id,
+        createdAt: entry.createdAt,
+      },
+    })
+  })
+
+  // create new openAI model
+  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
+  // create chain with Langchain
+  const chain = loadQARefineChain(model)
+  //  make openAI call using langchain to create embeddings
+  const embeddings = new OpenAIEmbeddings()
+  // create vector store
+  const store = MemoryVectorStore.fromDocuments(docs, embeddings)
+  const relevantDocs = (await store).similaritySearch(question)
+  const response = await chain.call({
+    input_documents: relevantDocs,
+    question,
+  })
+  return response.output_text
+}
