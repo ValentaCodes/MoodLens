@@ -72,7 +72,7 @@ export const analyze = async (content: string) => {
 
 // this function will turn our entries into documents to feed into our model and retrieve.
 // Will use memory vector db 
-const askMeAnything = async (question: string, entries: any) => {
+export const askMeAnything = async (question: string, entries: any) => {
   // convert entires into documents
   const docs = entries.map((entry: any) => {
     return new Document({
@@ -91,11 +91,13 @@ const askMeAnything = async (question: string, entries: any) => {
   //  make openAI call using langchain to create embeddings
   const embeddings = new OpenAIEmbeddings()
   // create vector store
-  const store = MemoryVectorStore.fromDocuments(docs, embeddings)
-  const relevantDocs = (await store).similaritySearch(question)
+  const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
+  const relevantDocs = await store.similaritySearch(question)
   const response = await chain.call({
     input_documents: relevantDocs,
     question,
   })
+  console.log(response);
+  
   return response.output_text
 }
