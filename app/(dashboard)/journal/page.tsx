@@ -6,8 +6,9 @@ import { revalidateJournalPage } from '@/utils/actions'
 import NewEntryCard from '@/components/NewEntryCard'
 import EntryCard from '@/components/EntryCard'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import QuestionForm from '@/components/Questions'
+import LoadingAnalysis from './[id]/loading'
 
 const getEntries = async () => {
   try {
@@ -41,10 +42,12 @@ const JournalPage = async () => {
   const entries = await getEntries()
 
   return (
-    <div className="py-6 px-6 bg-gray-200/30 sm:max-2xl:h-full">
+    <div className="py-6 px-6 bg-gray-200/30 3xl:h-screen">
       <div className="text-2xl mb-8 text-center">Journal</div>
       <div className="my-8">
+        <Suspense fallback={<LoadingAnalysis/>}>
         <QuestionForm />
+        </Suspense>
       </div>
       <div className="lg:grid lg:grid-cols-3 lg:gap-4 sm:max-2xl:w-4/5 sm:max-lg:flex-col sm:max-lg:flex sm:mx-0">
         <NewEntryCard />
