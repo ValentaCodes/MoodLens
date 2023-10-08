@@ -23,8 +23,8 @@ const getEntries = async () => {
         createdAt: 'desc',
       },
       include: {
-        analysis: true
-      }
+        analysis: true,
+      },
     })
 
     return journal_entries
@@ -37,7 +37,6 @@ const getEntries = async () => {
   revalidateJournalPage()
 }
 
-
 const JournalPage = async () => {
   const entries = await getEntries()
 
@@ -45,8 +44,8 @@ const JournalPage = async () => {
     <div className="py-6 px-6 bg-gray-200/30 3xl:h-screen">
       <div className="text-2xl mb-8 text-center">Journal</div>
       <div className="my-8">
-        <Suspense fallback={<LoadingAnalysis/>}>
-        <QuestionForm />
+        <Suspense fallback={<LoadingAnalysis />}>
+          <QuestionForm />
         </Suspense>
       </div>
       <div className="lg:grid lg:grid-cols-3 lg:gap-4 sm:max-2xl:w-4/5 sm:max-lg:flex-col sm:max-lg:flex sm:mx-0">
