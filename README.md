@@ -23,7 +23,7 @@
 
 ## **Tools**
 
-  - ChatGPT
+  - OpenAI
   - LangChain
   - Zod
   - Typescript + React
