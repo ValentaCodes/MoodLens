@@ -16,6 +16,10 @@ const links = [
     href: '/analysis',
     label: 'Analysis',
   },
+  {
+    href: '/history',
+    label: 'History'
+  }
 ]
 // Make sure to render the children. It will serve the purpose of it being a layout component
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
