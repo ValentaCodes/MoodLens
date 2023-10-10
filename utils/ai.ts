@@ -32,7 +32,7 @@ const instructions = StructuredOutputParser.fromZodSchema(
     sentimentScore: z
       .number()
       .describe(
-        'sentiment of the text rated on a scale from -10 to 10, where -10 is extremely negative.'
+        'sentiment of the text rated on a scale from -10 to 10. Where -10 is extremely negative, 10 is extremely positive, and 0 is neutral'
       ),
   })
 )
