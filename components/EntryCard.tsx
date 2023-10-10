@@ -1,4 +1,4 @@
-import Entry from '@/utils/interfaces'
+import {Entry} from '@/utils/interfaces'
 import React from 'react'
 interface EntryProps {
   entry: Entry
