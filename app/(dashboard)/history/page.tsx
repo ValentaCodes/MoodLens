@@ -27,8 +27,7 @@ const HistoryPage = async () => {
   const analysis = await getData()
   return (
     <div>
-      <Chart analysis={analysis}></Chart>
-      {/* <div>Average {score.avg}</div> */}
+      <Chart data={analysis}></Chart>
     </div>
   )
 }
