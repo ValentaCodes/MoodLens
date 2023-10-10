@@ -1,5 +1,4 @@
 // We don't need langchain to use openAi but it will make some things easier
-import { Document } from 'langchain/document'
 import { OpenAI } from 'langchain/llms/openai'
 import { StructuredOutputParser } from 'langchain/output_parsers'
 import { PromptTemplate } from 'langchain/prompts'
@@ -7,6 +6,7 @@ import { z } from 'zod'
 import { loadQARefineChain } from 'langchain/chains'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { MemoryVectorStore } from 'langchain/vectorstores/memory'
+import { Document } from 'langchain/document'
 // creates a zod schema that we will feed into langchain to coach the AI
 const instructions = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -70,10 +70,22 @@ export const analyze = async (content: string) => {
   }
 }
 
+// TODO: create a refinement prompt and template
+// const refineQuestionPrompt = () => {
+// CODE HERE
+// }
+
 // this function will turn our entries into documents to feed into our model and retrieve.
-// Will use memory vector db 
+// Will use an in-memory vector db
 export const askMeAnything = async (question: string, entries: any) => {
-  // convert entires into documents
+  // create the model and chains
+  const embeddings = new OpenAIEmbeddings()
+  const model = new OpenAI({
+    temperature: 0
+  })
+  const chain = loadQARefineChain(model /*TODO: refinement prompt*/)
+
+  // load documents and create memory store
   const docs = entries.map((entry: any) => {
     return new Document({
       pageContent: entry.content,
@@ -83,21 +95,14 @@ export const askMeAnything = async (question: string, entries: any) => {
       },
     })
   })
-
-  // create new openAI model
-  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
-  // create chain with Langchain
-  const chain = loadQARefineChain(model)
-  //  make openAI call using langchain to create embeddings
-  const embeddings = new OpenAIEmbeddings()
-  // create vector store
   const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
+
+  // Search relevant docs and return response
   const relevantDocs = await store.similaritySearch(question)
   const response = await chain.call({
     input_documents: relevantDocs,
     question,
   })
-  console.log(response);
-  
+
   return response.output_text
 }
