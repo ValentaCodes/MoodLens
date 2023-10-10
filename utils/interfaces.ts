@@ -1,4 +1,4 @@
-export interface Entry {
+export default interface Entry {
   id: string
   createdAt: Date
   updatedAt: Date
@@ -16,17 +16,4 @@ export interface Entry {
     subject: string
     sentimentScore: number
   } | null
-}
-export interface Analysis {
-  id: string
-  createdAt: Date
-  updatedAt: Date
-  entryId: string
-  mood: string
-  summary: string
-  color: string
-  negative: boolean
-  subject: string
-  sentimentScore: number
-  avg: number
 }

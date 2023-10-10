@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useAutosave } from 'react-autosave'
 import { revalidateAnalysisData } from '@/utils/actions'
 import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
-import { Entry } from '@/utils/interfaces'
+import Entry from '@/utils/interfaces'
 
 interface EntryProps {
   entry: Entry | null
