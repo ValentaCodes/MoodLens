@@ -78,36 +78,36 @@ export const analyze = async (content: string) => {
 
 // this function will turn our entries into documents to feed into our model and retrieve.
 // Will use an in-memory vector db
-// export const askMeAnything = async (question: string, entries: any) => {
-//   // create the model and chains
-//   const embeddings = new OpenAIEmbeddings({
-//     modelName: 'text-embedding-ada-002',
-//   })
-//   const model = new OpenAI({
-//     temperature: 0,
-//   })
-//   const chain = loadQARefineChain(model /*TODO: refinement prompt*/)
+export const askMeAnything = async (question: string, entries: any) => {
+  // create the model and chains
+  const embeddings = new OpenAIEmbeddings({
+    modelName: 'text-embedding-ada-002',
+  })
+  const model = new OpenAI({
+    temperature: 0,
+  })
+  const chain = loadQARefineChain(model /*TODO: refinement prompt*/)
 
-//   // load documents and create memory store
-//   const docs = entries.map((entry: any) => {
-//     return new Document({
-//       pageContent: entry.content,
-//       metadata: {
-//         id: entry.id,
-//         createdAt: entry.createdAt,
-//       },
-//     })
-//   })
-//   console.table('docs', docs);
-  
-//   const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
+  // load documents and create memory store
+  const docs = entries.map((entry: any) => {
+    return new Document({
+      pageContent: entry.content,
+      metadata: {
+        id: entry.id,
+        createdAt: entry.createdAt,
+      },
+    })
+  })
+  console.table('docs', docs)
 
-//   // Search relevant docs and return response
-//   const relevantDocs = await store.similaritySearch(question)
-//   const response = await chain.call({
-//     input_documents: relevantDocs,
-//     question,
-//   })
+  const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
 
-//   return response.output_text
-// }
+  // Search relevant docs and return response
+  const relevantDocs = await store.similaritySearch(question)
+  const response = await chain.call({
+    input_documents: relevantDocs,
+    question,
+  })
+
+  return response.output_text
+}
