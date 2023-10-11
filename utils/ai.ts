@@ -41,7 +41,7 @@ const getPrompt = async (content: string) => {
   const formattedInstructions = instructions.getFormatInstructions()
   // creates a new prompt template that will receive input (entry's) and format to follow (formatted instructions)
   const prompt = new PromptTemplate({
-    template: `You are Doctor of Psychology, analyze the following journal entry as if it were a patient. Follow the instructions and format your response to match the format instructions, no matter what! \n
+    template: `Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n
         {formattedInstructions}\n{entry}`,
     inputVariables: [`entry`],
     partialVariables: { formattedInstructions },
@@ -61,48 +61,53 @@ export const analyze = async (content: string) => {
   const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
   // call the model and initiate result
   const result = await model.call(input)
+  console.log(result)
 
   try {
     // this will finally parse the result into javascript object. it was markdown prior
     return instructions.parse(result)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
-// TODO: create a refinement prompt and template
+// TODO: create a refinement prompt and template - not priority
 // const refineQuestionPrompt = () => {
 // CODE HERE
 // }
 
 // this function will turn our entries into documents to feed into our model and retrieve.
 // Will use an in-memory vector db
-export const askMeAnything = async (question: string, entries: any) => {
-  // create the model and chains
-  const embeddings = new OpenAIEmbeddings()
-  const model = new OpenAI({
-    temperature: 0
-  })
-  const chain = loadQARefineChain(model /*TODO: refinement prompt*/)
+// export const askMeAnything = async (question: string, entries: any) => {
+//   // create the model and chains
+//   const embeddings = new OpenAIEmbeddings({
+//     modelName: 'text-embedding-ada-002',
+//   })
+//   const model = new OpenAI({
+//     temperature: 0,
+//   })
+//   const chain = loadQARefineChain(model /*TODO: refinement prompt*/)
 
-  // load documents and create memory store
-  const docs = entries.map((entry: any) => {
-    return new Document({
-      pageContent: entry.content,
-      metadata: {
-        id: entry.id,
-        createdAt: entry.createdAt,
-      },
-    })
-  })
-  const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
+//   // load documents and create memory store
+//   const docs = entries.map((entry: any) => {
+//     return new Document({
+//       pageContent: entry.content,
+//       metadata: {
+//         id: entry.id,
+//         createdAt: entry.createdAt,
+//       },
+//     })
+//   })
+//   console.table('docs', docs);
+  
+//   const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
 
-  // Search relevant docs and return response
-  const relevantDocs = await store.similaritySearch(question)
-  const response = await chain.call({
-    input_documents: relevantDocs,
-    question,
-  })
+//   // Search relevant docs and return response
+//   const relevantDocs = await store.similaritySearch(question)
+//   const response = await chain.call({
+//     input_documents: relevantDocs,
+//     question,
+//   })
 
-  return response.output_text
-}
+//   return response.output_text
+// }

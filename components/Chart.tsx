@@ -4,8 +4,8 @@ import React from 'react'
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
 
 const Chart = ({ data }: any) => {
-  console.log(data);
-  
+  console.log(data)
+
   return (
     <div>
       <LineChart

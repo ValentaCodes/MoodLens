@@ -20,7 +20,7 @@ const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
       await updateEntry(entry?.id as string, _value!)
       setIsLoading(false)
       // server action that invalidates cached data
-      revalidateAnalysisData(entry?.id)
+      await revalidateAnalysisData(entry?.id)
     },
   })
   return (

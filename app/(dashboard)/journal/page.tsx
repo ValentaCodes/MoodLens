@@ -29,12 +29,12 @@ const getEntries = async () => {
 
     return journal_entries
   } catch (error) {
-    console.log(
-      "Something went wrong, we couldn't locate any journal entries",
+    console.error(
+      "Something went wrong, I couldn't locate any journal entries",
       error
     )
   }
-  revalidateJournalPage()
+  await revalidateJournalPage()
 }
 
 const JournalPage = async () => {
