@@ -1,11 +1,13 @@
 import Chart from '@/components/Chart'
 import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
 
 const getData = async () => {
   const user = await getUserByClerkId()
+
   const analysis = await prisma.analysis.findMany({
     where: {
       userId: user?.id,
@@ -22,12 +24,12 @@ const getData = async () => {
 
   return { analysis, avg }
 }
-
+const MyChart = dynamic(() => import('@/components/Chart'), {ssr: false})
 const HistoryPage = async () => {
   const analysis = await getData()
   return (
     <div>
-      <Chart data={analysis}></Chart>
+      <MyChart data={analysis}></MyChart>
     </div>
   )
 }
