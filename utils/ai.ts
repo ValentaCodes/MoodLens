@@ -61,7 +61,6 @@ export const analyze = async (content: string) => {
   const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
   // call the model and initiate result
   const result = await model.call(input)
-  console.log(result)
 
   try {
     // this will finally parse the result into javascript object. it was markdown prior
