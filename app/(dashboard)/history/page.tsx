@@ -3,7 +3,7 @@ import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import dynamic from 'next/dynamic'
 import React from 'react'
-
+import { revalidateHistoryPage } from '@/utils/actions'
 
 const getData = async () => {
   try {
@@ -26,6 +26,7 @@ const getData = async () => {
   } catch (e) {
     console.error(e)
   }
+  await revalidateHistoryPage()
 }
 
 const MyChart = dynamic(() => import('@/components/Chart'), {ssr: false})
