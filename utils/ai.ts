@@ -1,5 +1,4 @@
 // We don't need langchain to use openAi but it will make some things easier
-import { Document } from 'langchain/document'
 import { OpenAI } from 'langchain/llms/openai'
 import { StructuredOutputParser } from 'langchain/output_parsers'
 import { PromptTemplate } from 'langchain/prompts'
@@ -7,6 +6,7 @@ import { z } from 'zod'
 import { loadQARefineChain } from 'langchain/chains'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { MemoryVectorStore } from 'langchain/vectorstores/memory'
+import { Document } from 'langchain/document'
 // creates a zod schema that we will feed into langchain to coach the AI
 const instructions = StructuredOutputParser.fromZodSchema(
   z.object({
@@ -32,7 +32,7 @@ const instructions = StructuredOutputParser.fromZodSchema(
     sentimentScore: z
       .number()
       .describe(
-        'sentiment of the text rated on a scale from -10 to 10, where -10 is extremely negative.'
+        'sentiment of the text rated on a scale from -10 to 10. Where -10 is extremely negative, 10 is extremely positive, and 0 is neutral'
       ),
   })
 )
@@ -41,7 +41,7 @@ const getPrompt = async (content: string) => {
   const formattedInstructions = instructions.getFormatInstructions()
   // creates a new prompt template that will receive input (entry's) and format to follow (formatted instructions)
   const prompt = new PromptTemplate({
-    template: `You are Doctor of Psychology, analyze the following journal entry as if it were a patient. Follow the instructions and format your response to match the format instructions, no matter what! \n
+    template: `Analyze the following journal entry. Follow the instructions and format your response to match the format instructions, no matter what! \n
         {formattedInstructions}\n{entry}`,
     inputVariables: [`entry`],
     partialVariables: { formattedInstructions },
@@ -61,19 +61,34 @@ export const analyze = async (content: string) => {
   const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
   // call the model and initiate result
   const result = await model.call(input)
+  console.log(result)
 
   try {
     // this will finally parse the result into javascript object. it was markdown prior
     return instructions.parse(result)
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 }
 
+// TODO: create a refinement prompt and template - not priority
+// const refineQuestionPrompt = () => {
+// CODE HERE
+// }
+
 // this function will turn our entries into documents to feed into our model and retrieve.
-// Will use memory vector db 
+// Will use an in-memory vector db
 export const askMeAnything = async (question: string, entries: any) => {
-  // convert entires into documents
+  // create the model and chains
+  const embeddings = new OpenAIEmbeddings({
+    modelName: 'text-embedding-ada-002',
+  })
+  const model = new OpenAI({
+    temperature: 0,
+  })
+  const chain = loadQARefineChain(model /*TODO: refinement prompt*/)
+
+  // load documents and create memory store
   const docs = entries.map((entry: any) => {
     return new Document({
       pageContent: entry.content,
@@ -83,21 +98,16 @@ export const askMeAnything = async (question: string, entries: any) => {
       },
     })
   })
+  console.table('docs', docs)
 
-  // create new openAI model
-  const model = new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' })
-  // create chain with Langchain
-  const chain = loadQARefineChain(model)
-  //  make openAI call using langchain to create embeddings
-  const embeddings = new OpenAIEmbeddings()
-  // create vector store
   const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
+
+  // Search relevant docs and return response
   const relevantDocs = await store.similaritySearch(question)
   const response = await chain.call({
     input_documents: relevantDocs,
     question,
   })
-  console.log(response);
-  
+
   return response.output_text
 }

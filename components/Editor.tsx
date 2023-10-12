@@ -7,7 +7,7 @@ import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
 import Entry from '@/utils/interfaces'
 
 interface EntryProps {
-  entry: Entry | null 
+  entry: Entry | null
 }
 
 const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
@@ -20,7 +20,7 @@ const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
       await updateEntry(entry?.id as string, _value!)
       setIsLoading(false)
       // server action that invalidates cached data
-      revalidateAnalysisData(entry?.id)
+      await revalidateAnalysisData(entry?.id)
     },
   })
   return (
