@@ -80,9 +80,7 @@ export const analyze = async (content: string) => {
 // Will use an in-memory vector db
 export const askMeAnything = async (question: string, entries: any) => {
   // create the model and chains
-  const embeddings = new OpenAIEmbeddings({
-    modelName: 'text-embedding-ada-002',
-  })
+  const embeddings = new OpenAIEmbeddings()
   const model = new OpenAI({
     temperature: 0,
   })
