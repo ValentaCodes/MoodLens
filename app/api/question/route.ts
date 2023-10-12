@@ -18,7 +18,7 @@ export const POST = async (request: NextRequest) => {
     },
   })
 
-  const answer = askMeAnything(question, entries)
+  const answer = await askMeAnything(question, entries)
 
   return NextResponse.json({ data: answer })
 }

@@ -1,27 +1,33 @@
 'use client'
 
 import React from 'react'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts'
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
+import dynamic from 'next/dynamic'
 
 const Chart = ({ data }: any) => {
-  console.log(data)
+  // console.log(data)
 
   return (
-    <div>
       <LineChart
-        width={600}
+        width={730}
         height={300}
         data={data.analysis}
-        margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
+        <CartesianGrid stroke="#ccc" strokeDasharray={5} />
         <Line type="monotone" dataKey="sentimentScore" stroke="#8884d8" />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis dataKey="createdAt" />
-        <YAxis dataKey="sentimentScore" />
+        <YAxis />
         <Tooltip />
       </LineChart>
-      <div>Average: {data.avg}</div>
-    </div>
   )
 }
 
