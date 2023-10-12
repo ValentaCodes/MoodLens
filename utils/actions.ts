@@ -9,3 +9,7 @@ export const revalidateAnalysisData = async (params: Params | any) => {
 export const revalidateJournalPage = async () => {
   revalidatePath('/journal')
 }
+
+export const revalidateHistoryPage = async () => {
+  revalidatePath('/history')
+}

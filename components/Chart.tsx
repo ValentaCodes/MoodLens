@@ -8,13 +8,9 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
 } from 'recharts'
-import dynamic from 'next/dynamic'
 
 const Chart = ({ data }: any) => {
-  // console.log(data)
-
   return (
       <LineChart
         width={730}
@@ -24,7 +20,7 @@ const Chart = ({ data }: any) => {
       >
         <CartesianGrid stroke="#ccc" strokeDasharray={5} />
         <Line type="monotone" dataKey="sentimentScore" stroke="#8884d8" />
-        <XAxis dataKey="createdAt" />
+        <XAxis dataKey="createdAt" order={'dsc'}/>
         <YAxis />
         <Tooltip />
       </LineChart>
