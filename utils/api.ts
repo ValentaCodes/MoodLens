@@ -10,9 +10,6 @@ export const createNewEntry = async () => {
     // this creates a new request object
     new Request(createURL('/api/journal'), {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
     })
   )
 
