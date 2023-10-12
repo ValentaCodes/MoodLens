@@ -2,7 +2,7 @@
 import { updateEntry } from '@/utils/api'
 import React, { useState } from 'react'
 import { useAutosave } from 'react-autosave'
-// import { revalidateAnalysisData } from '@/utils/actions'
+import { revalidateAnalysisData } from '@/utils/actions'
 import LoadingAnalysis from '@/app/(dashboard)/journal/[id]/loading'
 import Entry from '@/utils/interfaces'
 
@@ -20,7 +20,7 @@ const Editor: React.FC<EntryProps> = ({ entry }: EntryProps) => {
       await updateEntry(entry?.id as string, _value!)
       setIsLoading(false)
       // server action that invalidates cached data
-      // await revalidateAnalysisData(entry?.id)
+      await revalidateAnalysisData(entry?.id)
     },
   })
   return (
