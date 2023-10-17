@@ -9,6 +9,8 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  ResponsiveContainer,
+  AreaChart,
 } from 'recharts'
 
 const Chart = ({ data }: any) => {
@@ -21,23 +23,26 @@ const Chart = ({ data }: any) => {
       return (item.createdAt = date.createdAt)
     })
   })
+
   return (
+    <div className='w-full h-full'>
+    <ResponsiveContainer /*width='80%' height='80%'*/ className={'sm:p-10 sm:m-10 w-4/5/4 h-4/5'}>
     <LineChart
-      width={730}
-      height={300}
       data={analysis}
       margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-    >
+      >
       <CartesianGrid stroke="#ccc" strokeDasharray={5} />
-      <XAxis dataKey="createdAt">
+      <XAxis dataKey="createdAt" className='sm:text-sm'>
         <Label value="Date" offset={0} position={'insideBottom'} />
       </XAxis>
-      <Line type="monotone" dataKey="sentimentScore" stroke="#8884d8" />
+      <Line type="monotone" dataKey="sentimentScore" stroke="#8884d8"/>
       <YAxis
         label={{ value: 'Sentiment Score', angle: -90, position: 'insideLeft' }}
-      />
+        />
       <Tooltip />
     </LineChart>
+    </ResponsiveContainer>
+    </div>
   )
 }
 

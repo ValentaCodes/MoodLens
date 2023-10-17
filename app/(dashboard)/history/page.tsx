@@ -45,7 +45,7 @@ const HistoryPage = async () => {
   const analysis = await getData()
   
   return (
-    <div>
+    <div className='h-full'>
       <MyChart data={analysis}></MyChart>
     </div>
   )
