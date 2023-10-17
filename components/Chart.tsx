@@ -25,14 +25,14 @@ const Chart = ({ data }: any) => {
   })
 
   return (
-    <div className='w-full h-full'>
-    <ResponsiveContainer /*width='80%' height='80%'*/ className={'sm:p-10 sm:m-10 w-4/5/4 h-4/5'}>
+    <div className='w-full h-full flex flex-row justify-center'>
+    <ResponsiveContainer width='85%' height='90%' className={'sm:p-4 sm:m-4'}>
     <LineChart
       data={analysis}
       margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
       <CartesianGrid stroke="#ccc" strokeDasharray={5} />
-      <XAxis dataKey="createdAt" className='sm:text-sm'>
+      <XAxis dataKey="createdAt" className='text-sm lg:text-lg'>
         <Label value="Date" offset={0} position={'insideBottom'} />
       </XAxis>
       <Line type="monotone" dataKey="sentimentScore" stroke="#8884d8"/>
