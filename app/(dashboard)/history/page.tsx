@@ -16,13 +16,24 @@ const getData = async () => {
         sentimentScore: true,
         createdAt: true,
       },
+      orderBy: {
+        createdAt: 'asc'
+      }
     })
     const sum = analysis.reduce((previousValue, currentValue) => {
       return previousValue + currentValue.sentimentScore
     }, 0)
+
     const avg = Math.round(sum / analysis.length)
-  
-    return { analysis, avg }
+
+    const date = analysis.map((item) => {
+      let newDate = {createdAt: item.createdAt.toLocaleDateString()};
+      // return newDate['createdAt'] = [item.createdAt.toLocaleDateString()]
+      // return item.createdAt.toLocaleDateString()
+      return newDate
+    })
+    
+    return { analysis, avg, date }
   } catch (e) {
     console.error(e)
   }
@@ -32,8 +43,9 @@ const getData = async () => {
 const MyChart = dynamic(() => import('@/components/Chart'), {ssr: false})
 const HistoryPage = async () => {
   const analysis = await getData()
+  
   return (
-    <div>
+    <div className='h-full'>
       <MyChart data={analysis}></MyChart>
     </div>
   )
