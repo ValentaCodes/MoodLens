@@ -25,23 +25,27 @@ const Chart = ({ data }: any) => {
   })
 
   return (
-    <div className='w-full h-full flex flex-row justify-center'>
-    <ResponsiveContainer width='85%' height='90%' className={'sm:p-4 sm:m-4'}>
-    <LineChart
-      data={analysis}
-      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-      <CartesianGrid stroke="#ccc" strokeDasharray={5} />
-      <XAxis dataKey="createdAt" className='text-sm lg:text-lg'>
-        <Label value="Date" offset={0} position={'insideBottom'} />
-      </XAxis>
-      <Line type="monotone" dataKey="sentimentScore" stroke="#8884d8"/>
-      <YAxis
-        label={{ value: 'Sentiment Score', angle: -90, position: 'insideLeft' }}
-        />
-      <Tooltip />
-    </LineChart>
-    </ResponsiveContainer>
+    <div className="w-full h-full flex flex-row justify-center">
+      <ResponsiveContainer width="85%" height="90%">
+        <LineChart
+          data={analysis}
+          margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
+        >
+          <CartesianGrid stroke="#b91c1c" strokeDasharray={10} />
+          <XAxis dataKey="createdAt" className="text-sm lg:text-lg">
+            <Label value="Date" offset={0} position={'insideBottom'} />
+          </XAxis>
+          <Line type="bumpX" dataKey="sentimentScore" stroke="#8884d8" />
+          <YAxis
+            label={{
+              value: 'Sentiment Score',
+              angle: -90,
+              position: 'insideLeft',
+            }}
+          />
+          <Tooltip />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   )
 }
