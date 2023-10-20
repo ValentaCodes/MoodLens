@@ -25,15 +25,15 @@ const Chart = ({ data }: any) => {
   })
 
   // TODO customize tooltip to show mood and color on hover
-  const CustomTooltip = ({payload, label, active}) => {
-    return (
-    <div>
-      <div>
+  // const CustomTooltip = ({payload, label, active}) => {
+  //   return (
+  //   <div>
+  //     <div>
 
-      </div>
-    </div>
-    )
-  }
+  //     </div>
+  //   </div>
+  //   )
+  // }
   
   return (
     <div className="w-full h-full flex flex-row justify-center">
