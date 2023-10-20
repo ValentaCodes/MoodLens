@@ -24,9 +24,20 @@ const Chart = ({ data }: any) => {
     })
   })
 
+  // TODO customize tooltip to show mood and color on hover
+  const CustomTooltip = ({payload, label, active}) => {
+    return (
+    <div>
+      <div>
+
+      </div>
+    </div>
+    )
+  }
+  
   return (
     <div className="w-full h-full flex flex-row justify-center">
-      <ResponsiveContainer width="85%" height="90%">
+      <ResponsiveContainer width="95%" height="100%" >
         <LineChart
           data={analysis}
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
