@@ -37,7 +37,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
               {links.map((link) => (
                 <li className="px-4 py-4" key={link.label}>
                   <Link href={link.href}>
-                    <p className="text-2xl ease-in-out duration-200 hover:rotate-6">
+                    <p className="text-lg md:text-2xl ease-in-out duration-200 hover:rotate-6">
                       {link.label}
                     </p>
                   </Link>

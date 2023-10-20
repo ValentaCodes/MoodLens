@@ -24,24 +24,39 @@ const Chart = ({ data }: any) => {
     })
   })
 
+  // TODO customize tooltip to show mood and color on hover
+  // const CustomTooltip = ({payload, label, active}) => {
+  //   return (
+  //   <div>
+  //     <div>
+
+  //     </div>
+  //   </div>
+  //   )
+  // }
+  
   return (
-    <div className='w-full h-full'>
-    <ResponsiveContainer /*width='80%' height='80%'*/ className={'sm:p-10 sm:m-10 w-4/5/4 h-4/5'}>
-    <LineChart
-      data={analysis}
-      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-      <CartesianGrid stroke="#ccc" strokeDasharray={5} />
-      <XAxis dataKey="createdAt" className='sm:text-sm'>
-        <Label value="Date" offset={0} position={'insideBottom'} />
-      </XAxis>
-      <Line type="monotone" dataKey="sentimentScore" stroke="#8884d8"/>
-      <YAxis
-        label={{ value: 'Sentiment Score', angle: -90, position: 'insideLeft' }}
-        />
-      <Tooltip />
-    </LineChart>
-    </ResponsiveContainer>
+    <div className="w-full h-full flex flex-row justify-center">
+      <ResponsiveContainer width="95%" height="100%" >
+        <LineChart
+          data={analysis}
+          margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
+        >
+          <CartesianGrid stroke="#b91c1c" strokeDasharray={10} />
+          <XAxis dataKey="createdAt" className="text-sm lg:text-lg">
+            <Label value="Date" offset={0} position={'insideBottom'} />
+          </XAxis>
+          <Line type="bumpX" dataKey="sentimentScore" stroke="#8884d8" />
+          <YAxis
+            label={{
+              value: 'Sentiment Score',
+              angle: -90,
+              position: 'insideLeft',
+            }}
+          />
+          <Tooltip />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   )
 }
