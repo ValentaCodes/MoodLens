@@ -31,6 +31,7 @@
   - PlanetScale
   - Next.js
   - Tailwind
+  - Jest
 
 ## **Motivation**
 
@@ -60,8 +61,6 @@
   ![Homepage](https://github.com/ValentaCodes/MoodLens/assets/92850947/5c5c20c2-24dd-4757-ab60-7d45ab78ae14)
 
 ## **Links**
-  
-  Add any relevant links for this project below:
 
   [Your Website](URL)
 
