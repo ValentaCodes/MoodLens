@@ -46,6 +46,7 @@ const HistoryPage = async () => {
   
   return (
     <div className='h-full'>
+      {/* <div className='text-sm md:text-2xl'> Average Sentiment: {analysis?.avg}</div> */}
       <MyChart data={analysis}></MyChart>
     </div>
   )
