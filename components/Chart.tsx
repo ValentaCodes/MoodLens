@@ -10,19 +10,14 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  AreaChart,
 } from 'recharts'
-
+ import { formatDate } from '@/utils/formatDate'
 const Chart = ({ data }: any) => {
+  
   // destructure data for formatting
-  const { analysis, date, avg } = data
+  const { analysis, date } = data
 
-  // NOTE: may be a better way to do the following
-  analysis.map((item: any) => {
-    date.forEach((date: any) => {
-      return (item.createdAt = date.createdAt)
-    })
-  })
+  formatDate(analysis, date)
 
   // TODO customize tooltip to show mood and color on hover
   // const CustomTooltip = ({payload, label, active}) => {
