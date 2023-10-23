@@ -24,8 +24,13 @@ test('Home', async () => {
   expect(
     screen.getByText('MoodLens, Your Ultimate Writing Companion')
   ).toBeTruthy()
+})
 
-  expect(screen.getByRole('button')).toBeEnabled
+test('Get started button should be enabled and display get started', async () => {
+  render(await Home())
+  
+	expect(screen.getByRole('button')).toBeEnabled
 
   await userEvent.click(screen.getByRole('button', { name: /Get Started/i }))
+	
 })
