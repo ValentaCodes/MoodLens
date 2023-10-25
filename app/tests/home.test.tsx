@@ -20,17 +20,14 @@ vi.mock('@clerk/nextjs', () => {
 
 test('Home', async () => {
   render(await Home())
+  const user = userEvent.setup()
 
   expect(
     screen.getByText('MoodLens, Your Ultimate Writing Companion')
   ).toBeTruthy()
+
+  expect(screen.getByRole('button')).toBeEnabled
+
+  await user.click(screen.getByRole('button', { name: /Get Started/i }))
 })
 
-test('Get started button should be enabled and display get started', async () => {
-  render(await Home())
-  
-	expect(screen.getByRole('button')).toBeEnabled
-
-  await userEvent.click(screen.getByRole('button', { name: /Get Started/i }))
-	
-})
