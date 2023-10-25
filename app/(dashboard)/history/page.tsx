@@ -1,4 +1,3 @@
-import Chart from '@/components/Chart'
 import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import dynamic from 'next/dynamic'
@@ -15,6 +14,7 @@ const getData = async () => {
       select: {
         sentimentScore: true,
         createdAt: true,
+        color: true,
       },
       orderBy: {
         createdAt: 'asc'
@@ -28,8 +28,6 @@ const getData = async () => {
 
     const date = analysis.map((item) => {
       let newDate = {createdAt: item.createdAt.toLocaleDateString()};
-      // return newDate['createdAt'] = [item.createdAt.toLocaleDateString()]
-      // return item.createdAt.toLocaleDateString()
       return newDate
     })
     

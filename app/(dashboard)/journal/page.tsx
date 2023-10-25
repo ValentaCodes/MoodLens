@@ -30,7 +30,7 @@ const getEntries = async () => {
     return journal_entries
   } catch (error) {
     console.error(
-      "Something went wrong, I couldn't locate any journal entries",
+      "Something went wrong, couldn't locate any journal entries",
       error
     )
   }
