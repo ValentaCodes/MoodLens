@@ -10,34 +10,34 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  AreaChart,
 } from 'recharts'
-
+import { formatDate } from '@/utils/formatDate'
 const Chart = ({ data }: any) => {
   // destructure data for formatting
-  const { analysis, date, avg } = data
+  const { analysis, date } = data
 
-  // NOTE: may be a better way to do the following
-  analysis.map((item: any) => {
-    date.forEach((date: any) => {
-      return (item.createdAt = date.createdAt)
+  formatDate(analysis, date)
+
+  const CustomTooltip = ({ payload, label, active }: any) => {
+    const color = payload.map((x: any) => {
+      return x.payload.color
     })
-  })
+    if (active && payload && payload.length) {
+      console.log(payload[0].payload.color)
+      return (
+        <div className="border rounded-md h-40 w-60 bg-gray-200">
+          <div className={`bg-[${payload[0].payload.color}] h-1/5 w-1/5`} />
+          <div className={`bg-[${color[0]}] h-1/5 w-1/5`} />
+          <p className="">{`${label}`}</p>
+          <p>{payload[0].value}</p>
+        </div>
+      )
+    }
+  }
 
-  // TODO customize tooltip to show mood and color on hover
-  // const CustomTooltip = ({payload, label, active}) => {
-  //   return (
-  //   <div>
-  //     <div>
-
-  //     </div>
-  //   </div>
-  //   )
-  // }
-  
   return (
     <div className="w-full h-full flex flex-row justify-center">
-      <ResponsiveContainer width="95%" height="100%" >
+      <ResponsiveContainer width="95%" height="100%">
         <LineChart
           data={analysis}
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
@@ -54,7 +54,7 @@ const Chart = ({ data }: any) => {
               position: 'insideLeft',
             }}
           />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
         </LineChart>
       </ResponsiveContainer>
     </div>

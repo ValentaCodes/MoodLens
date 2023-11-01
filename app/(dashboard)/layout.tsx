@@ -13,10 +13,6 @@ const links = [
     label: 'Journal',
   },
   {
-    href: '/analysis',
-    label: 'Analysis',
-  },
-  {
     href: '/history',
     label: 'History'
   }

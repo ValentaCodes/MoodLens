@@ -30,7 +30,7 @@ const getEntries = async () => {
     return journal_entries
   } catch (error) {
     console.error(
-      "Something went wrong, I couldn't locate any journal entries",
+      "Something went wrong, couldn't locate any journal entries",
       error
     )
   }
@@ -41,7 +41,7 @@ const JournalPage = async () => {
   const entries = await getEntries()
 
   return (
-    <div className="py-6 px-6 bg-gray-200/30 3xl:h-screen">
+    <div className="py-6 px-6 bg-gray-200/30 xl:h-full">
       <div className="text-2xl mb-8 text-center">Journal</div>
       <div className="my-8">
         <Suspense fallback={<LoadingAnalysis />}>
