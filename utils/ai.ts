@@ -70,7 +70,7 @@ export const analyze = async (content: string) => {
   }
 }
 
-// TODO: create a refinement prompt and template - not priority
+// TODO: create a refinement prompt and template 
 // const refineQuestionPrompt = () => {
 // CODE HERE
 // }
@@ -79,7 +79,7 @@ export const analyze = async (content: string) => {
 // Will use an in-memory vector db
 export const askMeAnything = async (question: string, entries: any) => {
   // create the model and chains
-  const embeddings = new OpenAIEmbeddings()
+  const embeddings = new OpenAIEmbeddings({modelName: 'text'})
   const model = new OpenAI({
     temperature: 0,
   })
@@ -95,7 +95,6 @@ export const askMeAnything = async (question: string, entries: any) => {
       },
     })
   })
-  console.table('docs', docs)
 
   const store = await MemoryVectorStore.fromDocuments(docs, embeddings)
 

@@ -59,5 +59,7 @@ export const askQuestion = async (question: any) => {
   if (res.ok) {
     const data = await res.json()
     return data.data
+  } else if (res.status == 500) {
+    throw new Error('Server error')
   }
 }
