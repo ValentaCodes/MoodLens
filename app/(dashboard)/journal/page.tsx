@@ -34,7 +34,7 @@ const getEntries = async () => {
       error
     )
   }
-  await revalidateJournalPage()
+  // await revalidateJournalPage()
 }
 
 const JournalPage = async () => {

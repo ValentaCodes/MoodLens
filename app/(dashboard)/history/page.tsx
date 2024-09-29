@@ -35,7 +35,7 @@ const getData = async () => {
   } catch (e) {
     console.error(e)
   }
-  await revalidateHistoryPage()
+  // await revalidateHistoryPage()
 }
 
 const MyChart = dynamic(() => import('@/components/Chart'), {ssr: false})
