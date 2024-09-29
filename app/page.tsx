@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { auth } from '@clerk/nextjs'
+import useAuth from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs/server'
 
 export default async function Home() {
   // make href dynamic based on user status
-      const { userId } = auth()
-      let href = userId ? '/journal' : '/new-user'
-    
+  const { userId } = auth()
+  console.log(userId, "USER")
+  let href = userId ? '/journal' : '/sign-up'
+
   // In tailwind w-screen&h-screen represent 100%vh/vw
   return (
     <div className="w-screen h-screen bg-black flex justify-center items-center text-white px-4">
