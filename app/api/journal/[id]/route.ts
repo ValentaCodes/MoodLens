@@ -14,7 +14,7 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
   // In Next we grab the the req.body by using the web standard "Request"
   const { content } = await request.json()
   const user = await getUserByClerkId()
-
+console.log(user, "user")
   // Update a user's journal entry
   const updatedEntry = await prisma.journalEntry.update({
     where: {
@@ -30,7 +30,7 @@ export const PATCH = async (request: NextRequest, { params }: Params) => {
       analysis: true,
     },
   })
-
+  console.log()
   const analysis = await analyze(updatedEntry.content)
 
   // update or create an analysis for a journal entry

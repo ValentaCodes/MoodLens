@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="sm:ml-[200px] sm:h-full">
         <header className="border-y sm:2xl:h-[60px] sm:border-b sm:border-black/10">
           <div className="flex items-center justify-end px-4 py-4 sm:h-full sm:w-full sm:px-6">
-            <UserButton showName={true} afterSignOutUrl={links[0].href} />
+            <UserButton showName={true} />
           </div>
         </header>
         <div className="flex text-center justify-center items-center sm:absolute sm:top-0 sm:w-[200px] sm:left-0 sm:border-r sm:h-full">
