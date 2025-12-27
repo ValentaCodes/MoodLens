@@ -26,7 +26,7 @@
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",
-    "langchain": "^0.0.153",
+    "langchain": "^0.3.37",
     "next": "^14.2.3",
     "openai": "^4.10.0",
     "postcss": "8.4.29",
